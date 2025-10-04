@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kayder - Home</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #000;
+            color: #0ff;
+            overflow-x: hidden;
+        }
+
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            z-index: -1;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background: rgba(0, 0, 0, 0.8);
+            border-bottom: 2px solid #0ff;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: #0ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #0ff;
+            text-decoration: none;
+            font-size: 18px;
+            transition: all 0.3s;
+            padding: 5px 10px;
+            border: 1px solid transparent;
+        }
+
+        nav a:hover {
+            border: 1px solid #0ff;
+            background: rgba(0, 255, 255, 0.1);
+        }
+
+        .container {
+            display: flex;
+            padding: 50px;
+            gap: 50px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .profile-section {
+            flex: 0 0 400px;
+        }
+
+        .profile-card {
+            background: rgba(0, 20, 40, 0.8);
+            border: 2px solid #0ff;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+        }
+
+        .profile-header {
+            border-left: 5px solid #0ff;
+            padding-left: 15px;
+            margin-bottom: 30px;
+        }
+
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 3px solid #0ff;
+            margin-bottom: 20px;
+            object-fit: cover;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .profile-avatar:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
+        }
+
+        .profile-name {
+            font-size: 32px;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .profile-username {
+            font-size: 20px;
+            color: #0ff;
+            margin-bottom: 5px;
+        }
+
+        .profile-role {
+            font-size: 16px;
+            color: #999;
+        }
+
+        .profile-level {
+            font-size: 14px;
+            color: #0ff;
+            margin-top: 5px;
+            padding: 5px 10px;
+            background: rgba(0, 255, 255, 0.1);
+            border-radius: 5px;
+            display: inline-block;
+            border: 1px solid #0ff;
+        }
+
+        .info-section {
+            margin-top: 30px;
+            border-left: 3px solid #0ff;
+            padding-left: 15px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: #0ff;
+            min-width: 100px;
+            font-size: 14px;
+        }
+
+        .info-text {
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .flag-icon {
+            width: 24px;
+            height: 24px;
+            vertical-align: middle;
+        }
+
+        .illustration-section {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .dev-illustration {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .developer-img {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+            display: block;
+            position: relative;
+            z-index: 2;
+        }
+
+        .floating-element {
+            position: absolute;
+            padding: 15px 25px;
+            background: rgba(0, 100, 200, 0.9);
+            border: 2px solid #0ff;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .element-1 { top: 50px; left: -50px; animation-delay: 0s; }
+        .element-2 { top: 100px; right: -30px; animation-delay: 1s; }
+        .element-3 { bottom: 100px; left: 0; animation-delay: 2s; }
+        .element-4 { bottom: 50px; right: 20px; animation-delay: 1.5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            background: transparent;
+        }
+
+        .social-icon img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+
+        .social-icon:hover {
+            transform: scale(1.2);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+        }
+
+        .time-display {
+            margin-top: 20px;
+            padding: 10px;
+            background: rgba(0, 50, 100, 0.5);
+            border-radius: 5px;
+            text-align: center;
+            border: 1px solid #0ff;
+        }
+
+        /* Character sitting at desk */
+        .desk-scene {
+            width: 100%;
+            height: 400px;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .character {
+            width: 200px;
+            height: 250px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .head {
+            width: 80px;
+            height: 80px;
+            background: #ffb380;
+            border-radius: 50%;
+            position: absolute;
+            top: 30px;
+            left: 60px;
+            border: 2px solid #ff8c42;
+        }
+
+        .hair {
+            width: 90px;
+            height: 40px;
+            background: #ff6b9d;
+            border-radius: 50% 50% 0 0;
+            position: absolute;
+            top: 25px;
+            left: 55px;
+        }
+
+        .body {
+            width: 100px;
+            height: 80px;
+            background: #4dd4ff;
+            position: absolute;
+            top: 100px;
+            left: 50px;
+            border-radius: 20px 20px 0 0;
+        }
+
+        .arm-left {
+            width: 60px;
+            height: 20px;
+            background: #4dd4ff;
+            position: absolute;
+            top: 110px;
+            left: 30px;
+            border-radius: 10px;
+            transform: rotate(-20deg);
+        }
+
+        .arm-right {
+            width: 60px;
+            height: 20px;
+            background: #4dd4ff;
+            position: absolute;
+            top: 110px;
+            right: 30px;
+            border-radius: 10px;
+            transform: rotate(20deg);
+        }
+
+        .laptop {
+            width: 140px;
+            height: 80px;
+            background: linear-gradient(135deg, #666, #999);
+            position: absolute;
+            bottom: 80px;
+            left: 30px;
+            border-radius: 5px;
+            border: 2px solid #333;
+        }
+
+        .screen {
+            width: 120px;
+            height: 70px;
+            background: #1a1a2e;
+            position: absolute;
+            top: 5px;
+            left: 10px;
+            border-radius: 3px;
+        }
+
+        .code-line {
+            height: 3px;
+            background: #0ff;
+            margin: 5px;
+            border-radius: 2px;
+            animation: typing 2s infinite;
+        }
+
+        @keyframes typing {
+            0%, 100% { width: 20px; }
+            50% { width: 80px; }
+        }
+
+        .desk {
+            width: 500px;
+            height: 100px;
+            background: linear-gradient(180deg, #8b5a3c, #654321);
+            position: absolute;
+            bottom: 0;
+            border-radius: 10px 10px 0 0;
+            border: 3px solid #4a2511;
+        }
+
+        @media (max-width: 968px) {
+            .container {
+                flex-direction: column;
+                padding: 20px;
+            }
+            
+            .profile-section {
+                flex: 1;
+                width: 100%;
+            }
+            
+            header {
+                padding: 15px 20px;
+            }
+            
+            nav {
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    
+    <header>
+        <div class="logo">
+            <div class="logo-icon">K</div>
+            <span>Kayder - Home</span>
+        </div>
+        <nav>
+            <a href="#">🏠 Home</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="profile-section">
+            <div class="profile-card">
+                <div class="profile-header">
+                    <img src="https://i.imgur.com/placeholder.jpg" alt="Avatar" class="profile-avatar" id="avatarImg">
+                    <h1 class="profile-name">Ngo Duc Tien</h1>
+                    <p class="profile-username">Kayder</p>
+                    <p class="profile-role">Junior Developer</p>
+                    <p class="profile-level">Coding level: Beginner</p>
+                </div>
+
+                <div class="info-section">
+                    <div class="info-item">
+                        <div class="info-label">Full name:</div>
+                        <div class="info-text">Ngo Duc Tien</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Nickname:</div>
+                        <div class="info-text">Kayder</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">DD/MM/YY:</div>
+                        <div class="info-text">27/04/2010</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Nation:</div>
+                        <div class="info-text">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='12' fill='%23DA251D'/%3E%3Cpath d='M12 6 L14.5 11 L20 11.5 L16 15.5 L17 21 L12 18 L7 21 L8 15.5 L4 11.5 L9.5 11 Z' fill='%23FFCD00'/%3E%3C/svg%3E" alt="Vietnam" class="flag-icon"> VietNam
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Email:</div>
+                        <div class="info-text">ngoductien2704@gmail.com</div>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-label">Language:</div>
+                        <div class="info-text">English, Vietnamese</div>
+                    </div>
+                    <div class="time-display" id="timeDisplay">
+                        <div id="currentTime"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="illustration-section">
+            <div class="dev-illustration">
+                <div class="floating-element element-1">WEB DEVELOPING</div>
+                <div class="floating-element element-2">CSS</div>
+                <div class="floating-element element-3">HTML</div>
+                <div class="floating-element element-4">JS</div>
+                
+                <div class="desk-scene">
+                    <div class="desk"></div>
+                    <div class="character">
+                        <div class="hair"></div>
+                        <div class="head"></div>
+                        <div class="body"></div>
+                        <div class="arm-left"></div>
+                        <div class="arm-right"></div>
+                        <div class="laptop">
+                            <div class="screen">
+                                <div class="code-line" style="width: 60px; margin-top: 10px;"></div>
+                                <div class="code-line" style="width: 80px;"></div>
+                                <div class="code-line" style="width: 40px;"></div>
+                                <div class="code-line" style="width: 70px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="social-links">
+                    <a href="https://www.facebook.com/tien.uc.569541" target="_blank" class="social-icon facebook" title="Facebook">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'%3E%3Ccircle cx='25' cy='25' r='25' fill='%231877F2'/%3E%3Cpath d='M30 16h-3c-2.8 0-5 2.2-5 5v3h-3v4h3v10h4V28h3l1-4h-4v-3c0-.6.4-1 1-1h3v-4z' fill='white'/%3E%3C/svg%3E" alt="Facebook">
+                    </a>
+                    <a href="https://www.tiktok.com/@ductien._.kayder" target="_blank" class="social-icon tiktok" title="TikTok">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'%3E%3Ccircle cx='25' cy='25' r='25' fill='%23000000'/%3E%3Cpath d='M32 16c0 2.2 1.8 4 4 4v4c-1.4 0-2.7-.4-3.8-1v5.5c0 5-4 9-9 9-2 0-3.8-.6-5.3-1.7-2-1.5-3.4-3.9-3.7-6.6 0-.2 0-.5 0-.7 0-5 4-9 9-9 .5 0 1 0 1.4.1v4.5c-.5-.1-.9-.2-1.4-.2-2.5 0-4.5 2-4.5 4.5 0 1.6.8 3 2.1 3.8.8.5 1.7.7 2.7.7 2.4 0 4.4-1.9 4.5-4.3V16h4z' fill='%2300F2EA'/%3E%3Cpath d='M31 18.5c.6.4 1.2.7 1.9.9.3.1.6.1.9.1v-3.2c-.3 0-.6-.1-.9-.2-.6-.2-1.2-.5-1.7-.9-.9-.8-1.5-1.8-1.7-3h-3.2v14.4c-.1 2.4-2.1 4.3-4.5 4.3-1 0-1.9-.3-2.7-.7.9.9 2.1 1.5 3.5 1.5 2.5 0 4.5-2 4.5-4.5v-9.7c.5.5 1.1.9 1.7 1.2.6.3 1.2.5 1.9.6v-3.3c-1.3-.2-2.4-1-3-2.1v1.6z' fill='%23FF004F'/%3E%3C/svg%3E" alt="TikTok">
+                    </a>
+                    <a href="https://github.com/ngoductien2704-tech" target="_blank" class="social-icon github" title="GitHub">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='50' height='50' viewBox='0 0 50 50'%3E%3Ccircle cx='25' cy='25' r='25' fill='%23181717'/%3E%3Cpath d='M25 10c-8.3 0-15 6.7-15 15 0 6.6 4.3 12.2 10.3 14.2.8.1 1-.3 1-.7v-2.6c-4.2.9-5.1-2-5.1-2-.7-1.7-1.7-2.2-1.7-2.2-1.4-.9.1-.9.1-.9 1.5.1 2.3 1.5 2.3 1.5 1.3 2.3 3.5 1.6 4.4 1.2.1-1 .5-1.6 1-2-3.3-.4-6.8-1.7-6.8-7.4 0-1.6.6-3 1.5-4-.2-.4-.7-1.9.1-4 0 0 1.3-.4 4.1 1.5 1.2-.3 2.5-.5 3.8-.5 1.3 0 2.6.2 3.8.5 2.9-1.9 4.1-1.5 4.1-1.5.8 2.1.3 3.6.1 4 1 1 1.5 2.4 1.5 4 0 5.8-3.5 7-6.8 7.4.5.5 1 1.4 1 2.8v4.1c0 .4.3.9 1 .7 6-2 10.3-7.6 10.3-14.2 0-8.3-6.7-15-15-15z' fill='white'/%3E%3C/svg%3E" alt="GitHub">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('vi-VN', { 
+                hour: '2-digit', 
+                minute: '2-digit', 
+                second: '2-digit',
+                hour12: false 
+            });
+            const dateString = now.toLocaleDateString('vi-VN');
+            document.getElementById('currentTime').textContent = `${timeString} | ${dateString}`;
+        }
+        
+        updateTime();
+        setInterval(updateTime, 1000);
+
+        // Avatar upload functionality
+        const avatarImg = document.getElementById('avatarImg');
+        avatarImg.addEventListener('click', function() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.onchange = function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(event) {
+                        avatarImg.src = event.target.result;
+                    };
+                    reader.readAsDataURL(file);
+                }
+            };
+            input.click();
+        });
+    </script>
+</body>
+</html>
