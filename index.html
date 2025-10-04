@@ -112,13 +112,6 @@
             border: 3px solid #0ff;
             margin-bottom: 20px;
             object-fit: cover;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .profile-avatar:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(0, 255, 255, 0.6);
         }
 
         .profile-name {
@@ -419,7 +412,7 @@
         <div class="profile-section">
             <div class="profile-card">
                 <div class="profile-header">
-                    <img src="https://i.postimg.cc/d16VZKYj/DUG06509.jpg" alt="Avatar" class="profile-avatar" id="avatarImg">
+                    <img src="https://i.postimg.cc/d16VZKYj/DUG06509.jpg" alt="Avatar" class="profile-avatar">
                     <h1 class="profile-name">Ngo Duc Tien</h1>
                     <p class="profile-username">Kayder</p>
                     <p class="profile-role">Junior Developer</p>
@@ -516,26 +509,6 @@
         
         updateTime();
         setInterval(updateTime, 1000);
-
-        // Avatar upload functionality
-        const avatarImg = document.getElementById('avatarImg');
-        avatarImg.addEventListener('click', function() {
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = 'image/*';
-            input.onchange = function(e) {
-                const file = e.target.files[0];
-                if (file) {
-                    const reader = new FileReader();
-                    reader.onload = function(event) {
-                        avatarImg.src = event.target.result;
-                    };
-                    reader.readAsDataURL(file);
-                }
-            };
-            input.click();
-        });
     </script>
 </body>
 </html>
-
